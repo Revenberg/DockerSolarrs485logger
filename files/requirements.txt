@@ -1,4 +1,3 @@
-flask
 serial
 pyowm
 configparser

@@ -66,7 +66,6 @@ def getData():
 
     values['AC Frequency (Hz)'] = instrument.read_register(3042, functioncode=4, signed=False) / 100 #Read AC Frequency as Unsigned 16-Bit
     values['Inverter Temperature (c)'] = instrument.read_register(3041, functioncode=4, signed=True) / 10 #Read Inverter Temperature as
-Signed 16-B$
 
     Realtime_DATA_yy = instrument.read_register(3072, functioncode=4, signed=False) #Read Year
     Realtime_DATA_mm = instrument.read_register(3073, functioncode=4, signed=False) #Read Month

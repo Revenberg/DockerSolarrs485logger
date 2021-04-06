@@ -1,7 +1,5 @@
 FROM hypriot/rpi-python:latest
 
-RUN pip install --upgrade pip
-
 COPY files/* /app/
 COPY config/* /app/
 WORKDIR /app

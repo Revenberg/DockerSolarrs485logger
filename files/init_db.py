@@ -54,6 +54,6 @@ try:
     print( dbclient.get_list_continuous_queries() )
 
 except Exception as e:
-    print('Error querying open database: ' + influx_database)
     print(e)
+    sys.exit('Error querying open database: ' + influx_database)
 

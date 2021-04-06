@@ -1,4 +1,4 @@
-FROM python:alpine3.7
+FROM hypriot/rpi-python:latest
 
 RUN pip install --upgrade pip
 

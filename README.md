@@ -1,13 +1,13 @@
-# solarrs485logger
+# DockerSolarrs485logger
 
 sudo apt install gnupg2 pass
-docker image build -t solarrs485logger  .
+docker image build -t DockerSolarrs485logger  .
 docker login -u revenberg
-docker image push revenberg/solarrs485logger:latest
+docker image push revenberg/DockerSolarrs485logger:latest
 
-docker run revenberg/solarrs485logger
+docker run revenberg/DockerSolarrs485logger
 
 
 docker exec -it ??? /bin/sh
 
-docker push revenberg/solarrs485logger:
+docker push revenberg/DockerSolarrs485logger:

@@ -3,6 +3,6 @@
 git pull
 chmod +x build.sh
 
-docker image build -t revenberg/solarrs485logger .
+docker image build -t revenberg/DockerSolarrs485logger .
 
-docker push revenberg/solarrs485logger
+docker push revenberg/DockerSolarrs485logger

@@ -23,3 +23,5 @@ if [ $rc -ne "0" ]; then
     echo "==========================================================="
     # docker run revenberg/solarrs485logger
 fi
+
+cd -

@@ -1,8 +1,21 @@
 #!/bin/bash
 
-git pull
-chmod +x build.sh
+rc=$(git remote show origin |  grep "local out of date" | wc -l)
 
-docker image build -t revenberg/dockersolarrs485logger .
+if [ $rc -ne "0" ]; then
+    git pull
+    chmod +x build.sh
 
-docker push revenberg/dockersolarrs485logger
+    docker image build -t revenberg/solarrs485logger .
+
+    docker push revenberg/solarrs485logger
+
+    # testing: 
+
+    echo "==========================================================="
+    echo "=                                                         ="
+    echo "=          docker run revenberg/solarrs485logger          ="
+    echo "=                                                         ="
+    echo "==========================================================="
+    # docker run revenberg/solarrs485logger
+fi

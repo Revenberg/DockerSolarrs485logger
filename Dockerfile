@@ -7,4 +7,4 @@ COPY config/* /app/
 WORKDIR /app
 RUN pip install -r requirements.txt
 
-CMD python ./DockerSolarrs485logger.py
+CMD python ./solarrs485logger.py

@@ -99,16 +99,6 @@ def getData():
     if not success:
         print('error writing to database')
 
-    json_body = {'points': [{
-                                 'fields': {'rs485':  '1' }
-                                        }],
-                            'measurement': 'keepalive'
-                            }
-
-    success = client.write(json_body,
-                            # params isneeded, otherwise error 'database is required' happens
-                        params={'db': influx_database})
-
     client.close()
 
 def openDatabase():

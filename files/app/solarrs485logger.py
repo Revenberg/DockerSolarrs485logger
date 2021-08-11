@@ -81,11 +81,11 @@ def getData():
     print("end")
 
     print("Date : {:02d}-{:02d}-20{:02d} {:02d}:{:02d}:{:02d}".format(Realtime_DATA_dd, Realtime_DATA_mm, Realtime_DATA_yy, Realtime_DATA_hh, Realtime_DATA_mi, Realtime_DATA_ss) )
-    print( json.dumps(values) )
+    print( values )
 
     if do_raw_log:
       print("Date : {:02d}-{:02d}-20{:02d} {:02d}:{:02d}:{:02d}".format(Realtime_DATA_dd, Realtime_DATA_mm, Realtime_DATA_yy, Realtime_DATA_hh, Realtime_DATA_mi, Realtime_DATA_ss) )
-      print( json.dumps(values) )
+      print( values) 
 
     json_body = {'points': [{
                             'fields': {k: v for k, v in values.items()}
@@ -93,6 +93,7 @@ def getData():
                         'measurement': influx_measurement
                         }
 
+    print( json.dumps(json_body) )
     client = InfluxDBClient(host=influx_server,
                             port=influx_port)
 

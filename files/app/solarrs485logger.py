@@ -26,29 +26,9 @@ influx_port = int(config.get('InfluxDB', 'influx_port'))
 influx_database = config.get('InfluxDB', 'database')
 influx_measurement = config.get('InfluxDB', 'measurement')
 
-if do_raw_log:
-    print("running with debug")
-    print(influx_server)
-    print(influx_port)
-    print(influx_database)
-    print(influx_measurement)
-
-    print(server)
-    print(port)
-
-    print(log_path)
-    print(do_raw_log)
-else:
-    print("running without debug")
-
-
 def getData():
-    print("start")
-    print(server)
-    print(port)
     instrument = rs485eth.Instrument(server, port, 1, debug=True) # port name, slave address
-    print("starting")
-    sys.stdout.flush()
+
     values = dict()
     values['Generated (All time)'] = instrument.read_long(3008, functioncode=4, signed=False) # Read All Time Energy (KWH Total) as Unsigned 32-Bit
     values['Generated (Today)'] = instrument.read_register(3014, numberOfDecimals=0, functioncode=4, signed=False) # Read Today Energy (KWH Total) as 16-Bit
@@ -81,10 +61,6 @@ def getData():
     values['Month energy (W)'] = instrument.read_register(3011, functioncode=4, signed=False) #Read AC Frequency as Unsigned 16-Bit
     values['Last month energy (W)'] = instrument.read_register(3013, functioncode=4, signed=False) #Read AC Frequency as Unsigned 16-Bit
     values['Last year energy'] = instrument.read_register(3019, functioncode=4, signed=False) #Read AC Frequency as Unsigned 16-Bit
-    print("end")
-
-    print("Date : {:02d}-{:02d}-20{:02d} {:02d}:{:02d}:{:02d}".format(Realtime_DATA_dd, Realtime_DATA_mm, Realtime_DATA_yy, Realtime_DATA_hh, Realtime_DATA_mi, Realtime_DATA_ss) )
-    print( values )
 
     if do_raw_log:
       print("Date : {:02d}-{:02d}-20{:02d} {:02d}:{:02d}:{:02d}".format(Realtime_DATA_dd, Realtime_DATA_mm, Realtime_DATA_yy, Realtime_DATA_hh, Realtime_DATA_mi, Realtime_DATA_ss) )
@@ -96,7 +72,6 @@ def getData():
                         'measurement': influx_measurement
                         }
 
-    print( json.dumps(json_body) )
     client = InfluxDBClient(host=influx_server,
                             port=influx_port)
 
@@ -116,4 +91,3 @@ try:
 except Exception as e:
     print(e) 
     pass
-

@@ -1331,6 +1331,7 @@ class Instrument:
         self._print_debug(self.eth_address)
         self._print_debug(str(self.eth_port))
         sock.connect((self.eth_address, self.eth_port))
+        self._print_debug("============6b===================")
         sock.connect(request)
 ## Send some data, this method can be called multiple times
         self._print_debug("===============7================")

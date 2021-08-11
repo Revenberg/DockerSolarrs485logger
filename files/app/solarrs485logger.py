@@ -109,26 +109,6 @@ def getData():
 
     client.close()
 
-def openDatabase():
-    # if the db is not found, then try to create it
-    try:
-        dbclient = InfluxDBClient(host=influx_server, port=influx_port )
-        dblist = dbclient.get_list_database()
-        db_found = False
-        for db in dblist:
-            if db['name'] == influx_database:
-                db_found = True
-        if not(db_found):
-            print( dbclient.get_list_continuous_queries())
-            sys.exit('Database ' + influx_database + ' not found, create it')
-
-    except Exception as e:
-        print(e)
-        sys.exit('Error querying open influx_server: ' + influx_server)
-
-openDatabase()
-
-
 try:
     while True:
         getData()

@@ -1352,6 +1352,7 @@ class Instrument:
         self._print_debug("=========10======================")
 
         # Read and discard local echo
+        self._print_debug(self.handle_local_echo)
         if self.handle_local_echo:
             local_echo_to_discard = self.serial.read(len(request))
             if self.debug:
@@ -1386,20 +1387,20 @@ class Instrument:
             # Convert types to make it Python3 compatible
             answer = str(answer, encoding="latin1")
 
-        if self.debug:
-            template = (
-                "Response from instrument: {!r} ({}) ({} bytes), "
-                + "roundtrip time: {:.1f} ms. Timeout for reading: {:.1f} ms.\n"
-            )
-            text = template.format(
-                answer,
-                _hexlify(answer),
-                len(answer),
-                (_latest_read_times.get(self.serial.port, 0) - latest_write_time)
-                * _SECONDS_TO_MILLISECONDS,
-                self.serial.timeout * _SECONDS_TO_MILLISECONDS,
-            )
-            self._print_debug(text)
+        #if self.debug:
+        #    template = (
+        #        "Response from instrument: {!r} ({}) ({} bytes), "
+        #        + "roundtrip time: {:.1f} ms. Timeout for reading: {:.1f} ms.\n"
+        #    )
+        #    text = template.format(
+        #        answer,
+        #        _hexlify(answer),
+        #        len(answer),
+        #        (_latest_read_times.get(self.serial.port, 0) - latest_write_time)
+        #        * _SECONDS_TO_MILLISECONDS,
+        #        self.serial.timeout * _SECONDS_TO_MILLISECONDS,
+        #    )
+        #    self._print_debug(text)
 
         if not answer:
             raise NoResponseError("No communication with the instrument (no answer)")

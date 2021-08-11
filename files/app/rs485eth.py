@@ -1258,9 +1258,12 @@ class Instrument:
         This is taken care of automatically by MinimalModbus.
 
         """
+        print("============== 0 =================")
         _check_string(request, minlength=1, description="request")
+        print("============== 0 =================")
         _check_int(number_of_bytes_to_read)
 
+        print("============== 0 =================")
         self._print_debug(
             "Will write to instrument (expecting {} bytes back): {!r} ({})".format(
                 number_of_bytes_to_read, request, _hexlify(request)

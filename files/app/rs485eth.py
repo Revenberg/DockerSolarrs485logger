@@ -1341,8 +1341,6 @@ class Instrument:
         sock.send(request)
 ## Send some data, this method can be called multiple times
         self._print_debug("===============7================")                
-        #sys.stdout.flush()
-        #sock.send(request)                
         self._print_debug("================8===============")
 
         answer = sock.recv(1024)

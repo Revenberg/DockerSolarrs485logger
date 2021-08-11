@@ -1548,6 +1548,10 @@ def _parse_payload(
     payloadformat,
 ):
     print("===================d1 =============")
+    print(str(functioncode))
+    print(payload)
+    print(value)
+    print("===================d2 =============")
     _check_response_payload(
         payload,
         functioncode,
@@ -1560,8 +1564,6 @@ def _parse_payload(
         byteorder,
         payloadformat,
     )
-    print("===================d2 =============")
-    print(str(functioncode))
     print("===================d2 =============")
     if functioncode in [1, 2]:
         registerdata = payload[_NUMBER_OF_BYTES_BEFORE_REGISTERDATA:]

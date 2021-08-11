@@ -43,7 +43,7 @@ else:
 
 
 def getData():
-
+    print("start")
     instrument = rs485eth.Instrument(server, port, 1, debug=False) # port name, slave address
 
     values = dict()
@@ -78,6 +78,7 @@ def getData():
     values['Month energy (W)'] = instrument.read_register(3011, functioncode=4, signed=False) #Read AC Frequency as Unsigned 16-Bit
     values['Last month energy (W)'] = instrument.read_register(3013, functioncode=4, signed=False) #Read AC Frequency as Unsigned 16-Bit
     values['Last year energy'] = instrument.read_register(3019, functioncode=4, signed=False) #Read AC Frequency as Unsigned 16-Bit
+    print("end")
 
     print("Date : {:02d}-{:02d}-20{:02d} {:02d}:{:02d}:{:02d}".format(Realtime_DATA_dd, Realtime_DATA_mm, Realtime_DATA_yy, Realtime_DATA_hh, Realtime_DATA_mi, Realtime_DATA_ss) )
     print( json.dumps(values) )
@@ -124,7 +125,7 @@ def openDatabase():
 openDatabase()
 
 while True:
-    try: 
+    try:
         getData()
         time.sleep(60)
     except:

@@ -47,7 +47,7 @@ def getData():
     print(server)
     print(port)
     instrument = rs485eth.Instrument(server, port, 1, debug=True) # port name, slave address
-
+    print("starting")
     values = dict()
     values['Generated (All time)'] = instrument.read_long(3008, functioncode=4, signed=False) # Read All Time Energy (KWH Total) as Unsigned 32-Bit
     values['Generated (Today)'] = instrument.read_register(3014, numberOfDecimals=0, functioncode=4, signed=False) # Read Today Energy (KWH Total) as 16-Bit

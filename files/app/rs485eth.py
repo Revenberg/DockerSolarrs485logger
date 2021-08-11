@@ -1135,8 +1135,9 @@ class Instrument:
         )
 
         # Communicate with instrument
+        print("===================c1 =============")
         payload_from_slave = self._perform_command(functioncode, payload_to_slave)
-
+        print("===================c2 =============")
         # Parse response payload
         return _parse_payload(
             payload_from_slave,
@@ -1546,6 +1547,7 @@ def _parse_payload(
     byteorder,
     payloadformat,
 ):
+    print("===================d1 =============")
     _check_response_payload(
         payload,
         functioncode,
@@ -1558,13 +1560,16 @@ def _parse_payload(
         byteorder,
         payloadformat,
     )
+    print("===================d2 =============")
+    print(str(functioncode))
+    print("===================d2 =============")
     if functioncode in [1, 2]:
         registerdata = payload[_NUMBER_OF_BYTES_BEFORE_REGISTERDATA:]
         if payloadformat == _PAYLOADFORMAT_BIT:
             return _bytestring_to_bits(registerdata, number_of_bits)[0]
         elif payloadformat == _PAYLOADFORMAT_BITS:
             return _bytestring_to_bits(registerdata, number_of_bits)
-
+    print("===================d3 =============")
     if functioncode in [3, 4]:
         registerdata = payload[_NUMBER_OF_BYTES_BEFORE_REGISTERDATA:]
         if payloadformat == _PAYLOADFORMAT_STRING:
@@ -1585,7 +1590,7 @@ def _parse_payload(
             return _twobyte_string_to_num(
                 registerdata, numberOfDecimals, signed=signed
             )
-
+    print("===================d4 =============")
 
 def _embed_payload(slaveaddress, mode, functioncode, payloaddata):
     """Build a request from the slaveaddress, the function code and the payload data.

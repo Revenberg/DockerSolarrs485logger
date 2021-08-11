@@ -1334,13 +1334,12 @@ class Instrument:
         sock.connect((self.eth_address, self.eth_port))
         sys.stdout.flush()
         self._print_debug("============6b===================")
+        print(request)
+
         sys.stdout.flush()
         sock.connect(request)
 ## Send some data, this method can be called multiple times
-        self._print_debug("===============7================")
-        
-        print(request)
-
+        self._print_debug("===============7================")                
         sys.stdout.flush()
         sock.send(request)
         self._print_debug("================8===============")

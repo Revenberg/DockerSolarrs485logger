@@ -28,6 +28,8 @@ import sys
 import time
 import socket
 
+import serial
+
 if sys.version > "3":
     import binascii
 
@@ -1370,7 +1372,7 @@ class Instrument:
                     len(local_echo_to_discard),
                 )
                 raise LocalEchoError(text)
-
+        self._print_debug("=========99======================")
         # Read response
 #        answer = self.serial.read(number_of_bytes_to_read)
 #        _latest_read_times[self.serial.port] = _now()

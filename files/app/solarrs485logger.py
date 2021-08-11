@@ -125,10 +125,12 @@ def openDatabase():
 
 openDatabase()
 
-while True:
-    try:
+
+try:
+    while True:
         getData()
         time.sleep(60)
-    except:
-        pass
+except Exception as e:
+    print(e) 
+    pass
 

@@ -202,7 +202,7 @@ class Instrument:
             self.clear_buffers_before_each_transaction,
             self.handle_local_echo,
             self.debug,
-            self.serial,
+#            self.serial,
         )
 
     def _print_debug(self, text):
@@ -1352,28 +1352,27 @@ class Instrument:
         self._print_debug("=========10======================")
 
         # Read and discard local echo
-        self._print_debug(self.handle_local_echo)
-        if self.handle_local_echo:
-            local_echo_to_discard = self.serial.read(len(request))
-            if self.debug:
-                template = "Discarding this local echo: {!r} ({} bytes)."
-                text = template.format(
-                    local_echo_to_discard, len(local_echo_to_discard)
-                )
-                self._print_debug(text)
-            if local_echo_to_discard != request:
-                template = (
-                    "Local echo handling is enabled, but the local echo does "
-                    + "not match the sent request. "
-                    + "Request: {!r} ({} bytes), local echo: {!r} ({} bytes)."
-                )
-                text = template.format(
-                    request,
-                    len(request),
-                    local_echo_to_discard,
-                    len(local_echo_to_discard),
-                )
-                raise LocalEchoError(text)
+#        if self.handle_local_echo:
+#            local_echo_to_discard = self.serial.read(len(request))
+#            if self.debug:
+#                template = "Discarding this local echo: {!r} ({} bytes)."
+#                text = template.format(
+#                    local_echo_to_discard, len(local_echo_to_discard)
+#                )
+#                self._print_debug(text)
+#            if local_echo_to_discard != request:
+#                template = (
+#                    "Local echo handling is enabled, but the local echo does "
+#                    + "not match the sent request. "
+#                    + "Request: {!r} ({} bytes), local echo: {!r} ({} bytes)."
+#                )
+#                text = template.format(
+#                    request,
+#                    len(request),
+#                    local_echo_to_discard,
+#                    len(local_echo_to_discard),
+#                )
+#                raise LocalEchoError(text)
         self._print_debug("=========99======================")
         # Read response
 #        answer = self.serial.read(number_of_bytes_to_read)

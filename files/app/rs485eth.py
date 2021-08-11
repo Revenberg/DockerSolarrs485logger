@@ -1548,8 +1548,7 @@ def _parse_payload(
     payloadformat,
 ):
     print("===================d1 =============")
-    print(str(functioncode))
-    print(payload)
+    print(str(functioncode))    
     print(value)
     print("===================d2 =============")
     _check_response_payload(
@@ -3341,6 +3340,7 @@ def _check_response_payload(
     byteorder,  # Not used. For keeping same signature as _parse_payload()
     payloadformat,  # Not used. For keeping same signature as _parse_payload()
 ):
+    print("======= f1 ==============")
     if functioncode in [1, 2, 3, 4]:
         _check_response_bytecount(payload)
 
@@ -3359,7 +3359,7 @@ def _check_response_payload(
 
     elif functioncode == 16:
         _check_response_number_of_registers(payload, number_of_registers)
-
+    print("======= f2 ==============")
     # Response for read bits
     if functioncode in [1, 2]:
         registerdata = payload[_NUMBER_OF_BYTES_BEFORE_REGISTERDATA:]
@@ -3374,6 +3374,7 @@ def _check_response_payload(
 
     # Response for read registers
     if functioncode in [3, 4]:
+        print("======= f4 ==============")
         registerdata = payload[_NUMBER_OF_BYTES_BEFORE_REGISTERDATA:]
         number_of_register_bytes = number_of_registers * _NUMBER_OF_BYTES_PER_REGISTER
         if len(registerdata) != number_of_register_bytes:
@@ -3452,6 +3453,7 @@ def _check_response_bytecount(payload):
     POSITION_FOR_GIVEN_NUMBER = 0
     NUMBER_OF_BYTES_TO_SKIP = 1
 
+    print("============g1=========")
     _check_string(
         payload, minlength=1, description="payload", exception_type=InvalidResponseError
     )

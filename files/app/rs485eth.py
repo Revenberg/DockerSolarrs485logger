@@ -1206,11 +1206,12 @@ class Instrument:
 
         # Communicate
         response = self._communicate(request, number_of_bytes_to_read)
-
+        print("============== a1=")
         # Extract payload
         payload_from_slave = _extract_payload(
             response, self.address, self.mode, functioncode
         )
+        print("============== a2=")
         return payload_from_slave
 
     def _communicate(self, request, number_of_bytes_to_read):
@@ -1407,7 +1408,7 @@ class Instrument:
 
     # For backward compatibility
     _performCommand = _perform_command
-
+    print("================B1================")
 
 # ########## #
 # Exceptions #
@@ -1673,12 +1674,16 @@ def _extract_payload(response, slaveaddress, mode, functioncode):
     NUMBER_OF_LRC_BYTES = 1
     MINIMAL_RESPONSE_LENGTH_RTU = NUMBER_OF_RESPONSE_STARTBYTES + NUMBER_OF_CRC_BYTES
     MINIMAL_RESPONSE_LENGTH_ASCII = 9
-
+    print("========1====== b1=")
     # Argument validity testing (ValueError/TypeError at lib programming error)
     _check_string(response, description="response")
+    print("=======2======= b1=")
     _check_slaveaddress(slaveaddress)
+    print("=======3======= b1=")
     _check_mode(mode)
+    print("======4======== b1=")
     _check_functioncode(functioncode, None)
+    print("======5======== b1=")
 
     plainresponse = response
 

@@ -1258,12 +1258,12 @@ class Instrument:
         This is taken care of automatically by MinimalModbus.
 
         """
-        print("============== 0 =================")
+        self._print_debug("============== 0 =================")
         _check_string(request, minlength=1, description="request")
-        print("============== 0 =================")
+        self._print_debug("============== 0 =================")
         _check_int(number_of_bytes_to_read)
 
-        print("============== 0 =================")
+        self._print_debug("============== 0 =================")
         self._print_debug(
             "Will write to instrument (expecting {} bytes back): {!r} ({})".format(
                 number_of_bytes_to_read, request, _hexlify(request)
@@ -1280,12 +1280,12 @@ class Instrument:
 #            )
 #            self.serial.reset_input_buffer()
 #            self.serial.reset_output_buffer()
-        print("============== 1 =================")
+        self._print_debug("============== 1 =================")
         if sys.version_info[0] > 2:
             request = bytes(
                 request, encoding="latin1"
             )  # Convert types to make it Python3 compatible
-            print("============= 2 ==================")
+            self._print_debug("============= 2 ==================")
         # Sleep to make sure 3.5 character times have passed
 #        minimum_silent_period = _calculate_minimum_silent_period(self.serial.baudrate)
 #        time_since_read = _now() - _latest_read_times.get(self.serial.port, 0)
@@ -1308,7 +1308,7 @@ class Instrument:
 #            time.sleep(sleep_time)
 
         elif self.debug:
-            print("============= 3 ==================")
+            self._print_debug("============= 3 ==================")
             template = (
                 "No sleep required before write. "
                 + "Time since previous read: {:.2f} ms, minimum silent period: {:.2f} ms."
@@ -1318,26 +1318,26 @@ class Instrument:
                 minimum_silent_period * _SECONDS_TO_MILLISECONDS,
             )
             self._print_debug(text)
-        print("==============4=================")
+        self._print_debug("==============4=================")
         # Write request
         latest_write_time = _now()
 #        self.serial.write(request)
-        print("============5===================")
+        self._print_debug("============5===================")
 
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ## Connect to an IP with Port, could be a URL
-        print("================6===============")
+        self._print_debug("================6===============")
         sock.connect((self.eth_address, self.eth_port))
 ## Send some data, this method can be called multiple times
-        print("===============7================")
+        self._print_debug("===============7================")
         sock.send(request)
-        print("================8===============")
+        self._print_debug("================8===============")
 
         answer = sock.recv(1024)
-        print("=======9========================")
+        self._print_debug("=======9========================")
 ## Close the socket connection, no more data transmission
         sock.close()
-        print("=========10======================")
+        self._print_debug("=========10======================")
 
         # Read and discard local echo
         if self.handle_local_echo:

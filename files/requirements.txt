@@ -2,4 +2,3 @@ pySerial
 pyowm
 configparser
 influxdb
-socket

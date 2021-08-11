@@ -27,7 +27,8 @@ import struct
 import sys
 import time
 import socket
-#import serial
+
+import serial
 
 if sys.version > "3":
     import binascii

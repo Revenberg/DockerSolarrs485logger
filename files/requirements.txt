@@ -1,4 +1,4 @@
-pySerial
+serial
 pyowm
 configparser
 influxdb

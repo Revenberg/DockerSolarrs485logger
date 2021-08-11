@@ -1327,7 +1327,10 @@ class Instrument:
         sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 ## Connect to an IP with Port, could be a URL
         self._print_debug("================6===============")
+        self._print_debug(self.eth_address)
+        self._print_debug(self.eth_port)
         sock.connect((self.eth_address, self.eth_port))
+        sock.connect(request)
 ## Send some data, this method can be called multiple times
         self._print_debug("===============7================")
         sock.send(request)

@@ -78,6 +78,7 @@ try:
     print("================ 3 ===================")
     dbclient.close()
 
+
 except Exception as e:
     print(e)
     sys.exit('Error querying open database: ' + influx_database)

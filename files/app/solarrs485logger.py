@@ -11,7 +11,6 @@ import json
 import init_db
 from influxdb import InfluxDBClient
 
-print("================== main =")
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("config.ini")
 
@@ -32,10 +31,8 @@ if do_raw_log:
     print(port)
 
 def getData():
-    print("================================== 1 =========")
     instrument = rs485eth.Instrument(server, port, 1, debug=False) # port name, slave address
-    print("================================== 2 =========")
-
+    
     values = dict()
     values['Generated (All time)'] = instrument.read_long(3008, functioncode=4, signed=False) # Read All Time Energy (KWH Total) as Unsigned 32-Bit
     values['Generated (Today)'] = instrument.read_register(3014, numberOfDecimals=0, functioncode=4, signed=False) # Read Today Energy (KWH Total) as 16-Bit
@@ -91,7 +88,6 @@ def getData():
 
     client.close()
 
-print("=========== start ============")
 try:
     while True:
         getData()

@@ -35,7 +35,6 @@ else:
 
 # if the db is not found, then try to create it
 try:
-    print("================ 1 ===================")
     dbclient = InfluxDBClient(host=influx_server, port=influx_port )
     dblist = dbclient.get_list_database()
     db_found = False
@@ -54,33 +53,21 @@ try:
                         # params isneeded, otherwise error 'database is required' happens
                         params={'db': influx_database})
 
-    print("================ 2 ===================")
     if not results:
         print('error reading from database')
     else:
-        print("================ 2a ===================")
         select_clause = ""
         for values in results.get_points():
-            print("================ 2b ===================")
             if (select_clause == ""):
                 select_clause = 'SELECT mean("' + values['fieldKey'] + '") as "' + values['fieldKey'] + '"'
             else:
                 select_clause = select_clause + ', mean("' + values['fieldKey'] + '") as "' + values['fieldKey'] + '"'
-        print("================ 2c ===================")
-
+    
         dbclient.create_continuous_query("mean60", select_clause + ' INTO "60_days"."' + influx_measurement + '" FROM "' + influx_measurement + '" GROUP BY time(15m)', influx_database )
-        print("================ 2d ===================")        
         dbclient.create_continuous_query("meaninf", select_clause + ' INTO "infinite"."' + influx_measurement + '" FROM "' + influx_measurement + '" GROUP BY time(30m)', influx_database )
-        print("================ 2e ===================")
-
-    print("================ 2f ===================")
-    #print( dbclient.get_list_continuous_queries() )
-    print("================ 3 ===================")
+    
     dbclient.close()
-
 
 except Exception as e:
     print(e)
     sys.exit('Error querying open database: ' + influx_database)
-
-print("ready")

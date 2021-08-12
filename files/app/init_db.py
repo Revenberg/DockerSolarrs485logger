@@ -74,7 +74,7 @@ try:
         print("================ 2e ===================")
 
     print("================ 2f ===================")
-    print( dbclient.get_list_continuous_queries() )
+    #print( dbclient.get_list_continuous_queries() )
     print("================ 3 ===================")
     dbclient.close()
 

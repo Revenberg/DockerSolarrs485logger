@@ -67,11 +67,19 @@ try:
             else:
                 select_clause = select_clause + ', mean("' + values['fieldKey'] + '") as "' + values['fieldKey'] + '"'
         print("================ 2c ===================")
+
+        for cw in dbclient.get_list_continuous_queries():
+            print(cw)
+            if cw[influx_database]["name"] == "mean60":
+                dbclient.drop_continuous_query("mean60", influx_database )    
+            if cw[influx_database]["name"] == "meaninf":
+                dbclient.drop_continuous_query("meaninf", influx_database )
+        print("================ 2c1 ===================")        
         dbclient.create_continuous_query("mean60", select_clause + ' INTO "60_days"."' + influx_measurement + '" FROM "' + influx_measurement + '" GROUP BY time(15m)', influx_database )
-        print("================ 2d ===================")
+        print("================ 2d ===================")        
         dbclient.create_continuous_query("meaninf", select_clause + ' INTO "infinite"."' + influx_measurement + '" FROM "' + influx_measurement + '" GROUP BY time(30m)', influx_database )
         print("================ 2e ===================")
-        
+
     print("================ 2f ===================")
     print( dbclient.get_list_continuous_queries() )
     print("================ 3 ===================")

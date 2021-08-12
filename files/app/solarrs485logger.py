@@ -27,7 +27,7 @@ influx_database = config.get('InfluxDB', 'database')
 influx_measurement = config.get('InfluxDB', 'measurement')
 
 def getData():
-    instrument = rs485eth.Instrument(server, port, 1, debug=True) # port name, slave address
+    instrument = rs485eth.Instrument(server, port, 1, debug=False) # port name, slave address
 
     values = dict()
     values['Generated (All time)'] = instrument.read_long(3008, functioncode=4, signed=False) # Read All Time Energy (KWH Total) as Unsigned 32-Bit

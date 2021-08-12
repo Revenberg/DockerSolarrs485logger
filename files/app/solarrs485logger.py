@@ -26,6 +26,11 @@ influx_port = int(config.get('InfluxDB', 'influx_port'))
 influx_database = config.get('InfluxDB', 'database')
 influx_measurement = config.get('InfluxDB', 'measurement')
 
+if __debug__:
+    print("running with debug")
+    print(server)
+    print(port)
+
 def getData():
     print("================================== 1 =========")
     instrument = rs485eth.Instrument(server, port, 1, debug=False) # port name, slave address

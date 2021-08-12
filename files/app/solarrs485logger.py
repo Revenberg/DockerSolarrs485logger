@@ -26,7 +26,7 @@ influx_port = int(config.get('InfluxDB', 'influx_port'))
 influx_database = config.get('InfluxDB', 'database')
 influx_measurement = config.get('InfluxDB', 'measurement')
 
-if __debug__:
+if do_raw_log:
     print("running with debug")
     print(server)
     print(port)

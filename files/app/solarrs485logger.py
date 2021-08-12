@@ -11,7 +11,7 @@ import json
 import init_db
 from influxdb import InfluxDBClient
 
-
+print("================== main =")
 config = configparser.RawConfigParser(allow_no_value=True)
 config.read("config.ini")
 

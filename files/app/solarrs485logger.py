@@ -91,6 +91,7 @@ def getData():
 
     client.close()
 
+print("=========== start ============")
 try:
     while True:
         getData()

@@ -19,9 +19,9 @@ if [ $ex == true ]; then
     git pull
     chmod +x build.sh
 
-    docker image build -t revenberg/solarrs485logger .
+    docker image build -t revenberg/solarrs485logger:latest .
 
-    docker push revenberg/solarrs485logger
+    docker push revenberg/solarrs485logger:latest
 
     # testing: 
 
